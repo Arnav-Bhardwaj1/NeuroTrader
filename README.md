@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+# NeuroTrader
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered, immersive market analysis and paper trading platform built for the modern traders. 
 
-Currently, two official plugins are available:
+![NeuroTrader Overview](https://via.placeholder.com/800x400.png?text=NeuroTrader+Dashboard)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Rich Dashboard**: Enjoy a real-time feel with animated counters, sparklines, and market indices tracking. Get a bird’s eye view with an active AI signal feed.
+- **AI Insights**: Communicate with a mock AI analyst to generate market summaries, view sentiment heatmaps across sectors, and assess risk with confidence gauges.
+- **Detailed Stock Analysis**: Dive deep into individual equities with interactive Candlestick Charts powered by `lightweight-charts` and a dedicated AI breakdown (Sentiment, Risk, Predictions).
+- **Paper Trading**: Simulate buying and selling directly from the stock view to test strategies without real capital. Track estimated costs and current available cash.
+- **Custom Watchlists**: Create, edit, and manage personalized lists to track your favorite tickers in grid or list views.
+- **Global Market News**: Stay informed with categorized, real-time mock news featuring AI-powered Bullish/Bearish impact scoring.
+- **Premium UI**: Experience a sleek, modern, glassmorphism-inspired dark mode interface built with React, Framer Motion, and fine-tuned custom CSS.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Vanilla CSS with predefined CSS variables, `framer-motion` for micro-animations and page transitions
+- **Routing**: `react-router-dom`
+- **Charting**: `recharts` for generic data visualizations, `lightweight-charts` for high-performance financial candlestick charts
+- **Icons**: `lucide-react`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. **Install Dependencies**
+   \`\`\`bash
+   npm install
+   \`\`\`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. **Run Development Server**
+   \`\`\`bash
+   npm run dev
+   \`\`\`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. **Open in Browser**
+   Navigate to `http://localhost:5173` to explore NeuroTrader.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `src/pages/`: Contains all main application views (`DashboardPage`, `PortfolioPage`, `AIInsightsPage`, `StocksPage`, `StockDetailPage`, `WatchlistPage`, `NewsPage`, `SettingsPage`, etc.)
+- `src/components/layout/`: Includes `Sidebar` and `DashboardLayout` for the main structural scaffolding.
+- `src/lib/`: Contains mocked data (`mockData.ts`), AI simulants (`mockAI.ts`), utility functions, and mock authentication structures.
+- `src/index.css`: The central nervous system of styling and design tokens.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+
+MIT License. Feel free to fork, build upon, or use this as inspiration for your own fintech applications.

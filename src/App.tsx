@@ -9,6 +9,9 @@ import StocksPage from './pages/StocksPage';
 import StockDetailPage from './pages/StockDetailPage';
 import PortfolioPage from './pages/PortfolioPage';
 import AIInsightsPage from './pages/AIInsightsPage';
+import WatchlistPage from './pages/WatchlistPage';
+import NewsPage from './pages/NewsPage';
+import SettingsPage from './pages/SettingsPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -27,6 +30,9 @@ function AppRoutes() {
         <Route path="stocks/:symbol" element={<StockDetailPage />} />
         <Route path="portfolio" element={<PortfolioPage />} />
         <Route path="ai-insights" element={<AIInsightsPage />} />
+        <Route path="watchlists" element={<WatchlistPage />} />
+        <Route path="news" element={<NewsPage />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

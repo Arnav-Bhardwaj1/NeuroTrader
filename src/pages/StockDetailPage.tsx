@@ -300,6 +300,77 @@ function RiskPanel({ symbol }: { symbol: string }) {
   );
 }
 
+/* ── Paper Trading Panel ──────────────────────────────────────── */
+function TradingPanel({ stock }: { stock: any }) {
+  const [action, setAction] = useState<'BUY' | 'SELL'>('BUY');
+  const [shares, setShares] = useState(1);
+  const [ordered, setOrdered] = useState(false);
+
+  const total = shares * stock.price;
+
+  const handleTrade = () => {
+    setOrdered(true);
+    setTimeout(() => setOrdered(false), 3000);
+  };
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+      style={{ padding: 20, borderRadius: 'var(--radius-lg)', background: 'var(--bg-card)', border: '1px solid var(--border-primary)', marginTop: 16 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+        <h3 style={{ fontSize: 16, fontWeight: 800 }}>Trade {stock.symbol}</h3>
+        <span style={{ fontSize: 11, padding: '4px 8px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>Paper Trading</span>
+      </div>
+
+      {ordered ? (
+        <div style={{ padding: 30, textAlign: 'center', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)', border: '1px dashed var(--accent-green)' }}>
+          <div style={{ color: 'var(--accent-green)', fontWeight: 700, marginBottom: 8, fontSize: 16 }}>Order Filled!</div>
+          <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Successfully {action === 'BUY' ? 'bought' : 'sold'} <strong>{shares}</strong> shares of <strong>{stock.symbol}</strong></div>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ display: 'flex', gap: 4, background: 'var(--bg-tertiary)', padding: 4, borderRadius: 'var(--radius-md)' }}>
+            {(['BUY', 'SELL'] as const).map(a => (
+              <button key={a} onClick={() => setAction(a)} style={{
+                flex: 1, padding: '8px 0', borderRadius: 'var(--radius-sm)', fontSize: 13, fontWeight: 700,
+                background: action === a ? (a === 'BUY' ? 'var(--accent-green)' : 'var(--accent-red)') : 'transparent',
+                color: action === a ? '#000' : 'var(--text-muted)', transition: 'var(--transition-fast)'
+              }}>{a}</button>
+            ))}
+          </div>
+
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 12, color: 'var(--text-secondary)' }}>
+              <span>Shares</span>
+              <span>Available Cash: $24,500.00</span>
+            </div>
+            <input type="number" min="1" value={shares} onChange={e => setShares(Math.max(1, parseInt(e.target.value) || 1))}
+              style={{ width: '100%', padding: '12px 16px', borderRadius: 'var(--radius-md)', background: 'var(--bg-tertiary)', border: '1px solid var(--border-primary)', fontSize: 14, color: 'var(--text-primary)' }} />
+          </div>
+
+          <div style={{ padding: 12, borderRadius: 'var(--radius-md)', background: 'var(--bg-tertiary)', border: '1px solid var(--border-glass)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 12, color: 'var(--text-muted)' }}>
+              <span>Estimated Cost</span>
+              <span style={{ fontWeight: 700, fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>${total.toFixed(2)}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--text-muted)' }}>
+              <span>Commission</span>
+              <span>$0.00</span>
+            </div>
+          </div>
+
+          <button onClick={handleTrade} style={{
+            width: '100%', padding: 14, borderRadius: 'var(--radius-md)', fontSize: 14, fontWeight: 700,
+            background: action === 'BUY' ? 'var(--accent-green)' : 'var(--accent-red)', color: '#000',
+            transition: 'var(--transition-base)', cursor: 'pointer', border: 'none'
+          }}>
+            {action} {stock.symbol}
+          </button>
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
 /* ── Stock Detail Page ────────────────────────────────────────── */
 export default function StockDetailPage() {
   const { symbol = 'AAPL' } = useParams();
@@ -391,6 +462,9 @@ export default function StockDetailPage() {
             ))}
           </div>
         </motion.div>
+
+        {/* Trade Panel */}
+        <TradingPanel stock={stock} />
       </div>
 
       {/* Right: AI Panel */}
