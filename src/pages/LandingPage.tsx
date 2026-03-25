@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Brain, TrendingUp, BarChart3, Shield, Zap, LineChart, ArrowRight, Activity } from 'lucide-react';
-import { stocks } from '../../lib/mockData';
+import { stocks } from '../lib/mockData';
 
 /* ── Ticker Tape ──────────────────────────────────────────────── */
 function TickerTape() {
@@ -78,25 +78,6 @@ function AnimatedBg() {
     return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
   }, []);
   return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />;
-}
-
-/* ── Mini Chart SVG ───────────────────────────────────────────── */
-function MiniChart({ data, color }: { data: number[]; color: string }) {
-  const max = Math.max(...data); const min = Math.min(...data);
-  const h = 40; const w = 120;
-  const points = data.map((v, i) => `${(i / (data.length - 1)) * w},${h - ((v - min) / (max - min)) * h}`).join(' ');
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ overflow: 'visible' }}>
-      <defs>
-        <linearGradient id={`grad-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity="0.3" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <polygon points={`0,${h} ${points} ${w},${h}`} fill={`url(#grad-${color.replace('#', '')})`} />
-      <polyline points={points} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
 }
 
 /* ── Features Data ────────────────────────────────────────────── */

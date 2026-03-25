@@ -16,6 +16,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return stored ? JSON.parse(stored) : null;
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const login = useCallback(async (email: string, _password: string) => {
     await new Promise((r) => setTimeout(r, 800));
     const u = { name: email.split('@')[0], email };
@@ -24,6 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return true;
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const signup = useCallback(async (name: string, email: string, _password: string) => {
     await new Promise((r) => setTimeout(r, 800));
     const u = { name, email };
@@ -44,6 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth must be used within AuthProvider');

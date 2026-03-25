@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  ArrowUpRight, ArrowDownRight, Brain, MessageSquare, FileText,
+  ArrowUpRight, ArrowDownRight, MessageSquare, FileText,
   Shield, BarChart3, Loader2, Send, TrendingUp, TrendingDown, Minus,
 } from 'lucide-react';
 import { createChart, ColorType } from 'lightweight-charts';
 import { stocks, stockCandlestickData } from '../lib/mockData';
 import { getAIPrediction, getAISentiment, getAIRisk, getAIChatResponse } from '../lib/mockAI';
-import { formatCurrency, formatVolume, formatPercent } from '../lib/utils';
+import { formatVolume, formatPercent } from '../lib/utils';
 import type { PredictionData, SentimentData, RiskData, ChatMessage } from '../types';
 
 /* ── Candlestick Chart Component ──────────────────────────────── */
@@ -33,14 +33,16 @@ function CandlestickChart({ symbol, range }: { symbol: string; range: string }) 
       timeScale: { borderColor: 'rgba(55,65,81,0.3)', timeVisible: true },
     });
 
-    const candleSeries = chart.addCandlestickSeries({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const candleSeries = (chart as any).addCandlestickSeries({
       upColor: '#00FF88', downColor: '#FF3B5C',
       borderUpColor: '#00FF88', borderDownColor: '#FF3B5C',
       wickUpColor: '#00FF88', wickDownColor: '#FF3B5C',
     });
     candleSeries.setData(sliced.map(d => ({ time: d.time, open: d.open, high: d.high, low: d.low, close: d.close })));
 
-    const volumeSeries = chart.addHistogramSeries({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const volumeSeries = (chart as any).addHistogramSeries({
       color: 'rgba(6,214,160,0.2)',
       priceFormat: { type: 'volume' },
       priceScaleId: '',
@@ -72,12 +74,12 @@ function AIChat({ symbol }: { symbol: string }) {
 
   const send = async (text: string) => {
     if (!text.trim() || loading) return;
-    const userMsg: ChatMessage = { id: Date.now().toString(), role: 'user', content: text, timestamp: 'now' };
+    const userMsg: ChatMessage = { id: crypto.randomUUID(), role: 'user', content: text, timestamp: 'now' };
     setMessages(m => [...m, userMsg]);
     setInput('');
     setLoading(true);
     const response = await getAIChatResponse(text);
-    setMessages(m => [...m, { id: (Date.now() + 1).toString(), role: 'assistant', content: response, timestamp: 'now' }]);
+    setMessages(m => [...m, { id: crypto.randomUUID(), role: 'assistant', content: response, timestamp: 'now' }]);
     setLoading(false);
   };
 
@@ -268,7 +270,6 @@ function RiskPanel({ symbol }: { symbol: string }) {
   useEffect(() => { getAIRisk(symbol).then(setData); }, [symbol]);
   if (!data) return <div style={{ padding: 20, textAlign: 'center' }}><Loader2 size={20} style={{ animation: 'spin 1s linear infinite', color: 'var(--accent-cyan)' }} /></div>;
   const riskColor = data.riskLevel === 'Low' ? 'var(--accent-green)' : data.riskLevel === 'Medium' ? 'var(--accent-amber)' : 'var(--accent-red)';
-  const gaugeAngle = (data.compositeScore / 100) * 180 - 90;
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14, padding: '4px 0' }}>
       {/* Gauge */}
@@ -301,7 +302,7 @@ function RiskPanel({ symbol }: { symbol: string }) {
 }
 
 /* ── Paper Trading Panel ──────────────────────────────────────── */
-function TradingPanel({ stock }: { stock: any }) {
+function TradingPanel({ stock }: { stock: { symbol: string; price: number } }) {
   const [action, setAction] = useState<'BUY' | 'SELL'>('BUY');
   const [shares, setShares] = useState(1);
   const [ordered, setOrdered] = useState(false);

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Search, ArrowUpRight, ArrowDownRight, LayoutGrid, List, Filter } from 'lucide-react';
+import { Search, ArrowUpRight, ArrowDownRight, LayoutGrid, List } from 'lucide-react';
 import { stocks } from '../lib/mockData';
 import { formatPercent, formatVolume } from '../lib/utils';
 
@@ -55,7 +55,7 @@ export default function StocksPage() {
           ))}
         </div>
 
-        <select value={sortBy} onChange={e => setSortBy(e.target.value as any)}
+        <select value={sortBy} onChange={e => setSortBy(e.target.value as 'symbol' | 'price' | 'change')}
           style={{
             padding: '10px 12px', borderRadius: 'var(--radius-md)', background: 'var(--bg-secondary)',
             border: '1px solid var(--border-primary)', fontSize: 13, color: 'var(--text-primary)', cursor: 'pointer',

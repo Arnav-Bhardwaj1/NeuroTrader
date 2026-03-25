@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Brain, Send, Loader2, TrendingUp, TrendingDown, Target, Zap,
+  Brain, Send, Loader2, Target, Zap,
 } from 'lucide-react';
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
 } from 'recharts';
-import { signals, stocks, sectorPerformance } from '../lib/mockData';
+import { signals, stocks } from '../lib/mockData';
 import { getAIMarketSummary, getAIChatResponse } from '../lib/mockAI';
-import { formatPercent } from '../lib/utils';
 import type { ChatMessage } from '../types';
 
 /* ── Prediction Accuracy Data ─────────────────────────────────── */
@@ -25,6 +24,11 @@ export default function AIInsightsPage() {
   const [input, setInput] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  const sentimentHeatmapData = useState(() => stocks.slice(0, 8).map(s => ({
+    ...s,
+    sent: (Math.random() * 2 - 1)
+  })))[0];
 
   useEffect(() => { getAIMarketSummary().then(setSummary); }, []);
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
@@ -150,8 +154,8 @@ export default function AIInsightsPage() {
             }}>
             <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 14 }}>Sentiment Heatmap</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
-              {stocks.slice(0, 8).map(s => {
-                const sent = (Math.random() * 2 - 1);
+              {sentimentHeatmapData.map(s => {
+                const sent = s.sent;
                 const isPos = sent > 0;
                 const intensity = Math.abs(sent);
                 const bg = isPos

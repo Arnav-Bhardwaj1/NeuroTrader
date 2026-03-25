@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {
-  TrendingUp, TrendingDown, ArrowUpRight, ArrowDownRight,
+  ArrowUpRight, ArrowDownRight,
 } from 'lucide-react';
 import {
   PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend,
@@ -99,7 +99,7 @@ export default function PortfolioPage() {
               </Pie>
               <Tooltip
                 contentStyle={{ background: '#1a2035', border: '1px solid rgba(55,65,81,0.5)', borderRadius: 8, fontSize: 12 }}
-                formatter={(value: number) => formatCurrency(value)}
+                formatter={(value: any) => formatCurrency(Number(value))}
               />
               <Legend wrapperStyle={{ fontSize: 11 }} />
             </PieChart>

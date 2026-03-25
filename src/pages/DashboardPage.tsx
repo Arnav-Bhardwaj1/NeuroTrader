@@ -7,13 +7,13 @@ import {
 } from 'lucide-react';
 import { LineChart, Line, ResponsiveContainer } from 'recharts';
 import { stocks, marketIndices, signals, sectorPerformance, activityFeed, getPortfolioStats } from '../lib/mockData';
-import { formatCurrency, formatPercent, formatVolume } from '../lib/utils';
+import { formatPercent } from '../lib/utils';
 
 /* ── Animated Counter ─────────────────────────────────────────── */
 function AnimCounter({ target, prefix = '', suffix = '', decimals = 0 }: { target: number; prefix?: string; suffix?: string; decimals?: number }) {
   const [value, setValue] = useState(0);
   useEffect(() => {
-    let start = 0; const dur = 1200; const startTime = Date.now();
+    const start = 0; const dur = 1200; const startTime = Date.now();
     const tick = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / dur, 1);
