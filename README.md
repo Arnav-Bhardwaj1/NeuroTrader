@@ -1,8 +1,6 @@
 # NeuroTrader
 
-An AI-powered, immersive market analysis and paper trading platform built for the modern traders. 
-
-![NeuroTrader Overview](https://via.placeholder.com/800x400.png?text=NeuroTrader+Dashboard)
+An AI-powered, immersive market analysis and paper trading platform built for the modern traders.
 
 ## Features
 

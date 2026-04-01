@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight, BrainCircuit } from 'lucide-react';
 import { useAuth } from '../../lib/auth';
 
 const navItems = [
@@ -11,6 +11,7 @@ const navItems = [
   { path: '/portfolio', label: 'Portfolio', icon: Briefcase },
   { path: '/ai-insights', label: 'AI Insights', icon: Brain },
   { path: '/news', label: 'News', icon: Newspaper },
+  { path: '/strategy', label: 'Strategy', icon: BrainCircuit },
   { path: '/settings', label: 'Settings', icon: Settings },
 ];
 
