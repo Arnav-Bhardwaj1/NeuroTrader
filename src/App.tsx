@@ -13,6 +13,8 @@ import WatchlistPage from './pages/WatchlistPage';
 import NewsPage from './pages/NewsPage';
 import SettingsPage from './pages/SettingsPage';
 import StrategyPage from './pages/StrategyPage';
+import JournalPage from './pages/JournalPage';
+
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -35,7 +37,9 @@ function AppRoutes() {
         <Route path="news" element={<NewsPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="strategy" element={<StrategyPage />} />
+        <Route path="journal" element={<JournalPage />} />
       </Route>
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
