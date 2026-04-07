@@ -14,6 +14,8 @@ import NewsPage from './pages/NewsPage';
 import SettingsPage from './pages/SettingsPage';
 import StrategyPage from './pages/StrategyPage';
 import JournalPage from './pages/JournalPage';
+import ScannerPage from './pages/ScannerPage';
+
 
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -38,7 +40,9 @@ function AppRoutes() {
         <Route path="settings" element={<SettingsPage />} />
         <Route path="strategy" element={<StrategyPage />} />
         <Route path="journal" element={<JournalPage />} />
+        <Route path="scanner" element={<ScannerPage />} />
       </Route>
+
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
