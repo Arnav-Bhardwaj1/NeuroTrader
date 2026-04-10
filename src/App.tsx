@@ -15,6 +15,7 @@ import SettingsPage from './pages/SettingsPage';
 import StrategyPage from './pages/StrategyPage';
 import JournalPage from './pages/JournalPage';
 import ScannerPage from './pages/ScannerPage';
+import TerminalPage from './pages/TerminalPage';
 
 
 
@@ -41,6 +42,7 @@ function AppRoutes() {
         <Route path="strategy" element={<StrategyPage />} />
         <Route path="journal" element={<JournalPage />} />
         <Route path="scanner" element={<ScannerPage />} />
+        <Route path="terminal" element={<TerminalPage />} />
       </Route>
 
 
