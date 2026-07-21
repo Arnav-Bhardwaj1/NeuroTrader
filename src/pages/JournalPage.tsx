@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen,
@@ -34,17 +34,11 @@ import type { TradeEntry, JournalStats, PsychologyInsight } from '../lib/Journal
 import './JournalPage.css';
 
 const JournalPage: React.FC = () => {
-  const [trades, setTrades] = useState<TradeEntry[]>([]);
-  const [stats, setStats] = useState<JournalStats | null>(null);
-  const [insight, setInsight] = useState<PsychologyInsight | null>(null);
+  const [trades] = useState<TradeEntry[]>(() => JournalService.getTrades());
+  const [stats] = useState<JournalStats>(() => JournalService.getStats());
+  const [insight] = useState<PsychologyInsight>(() => JournalService.getAiInsight());
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<'ALL' | 'WIN' | 'LOSS'>('ALL');
-
-  useEffect(() => {
-    setTrades(JournalService.getTrades());
-    setStats(JournalService.getStats());
-    setInsight(JournalService.getAiInsight());
-  }, []);
 
   const filteredTrades = trades.filter(t => {
     const matchesSearch = t.symbol.toLowerCase().includes(searchQuery.toLowerCase()) ||

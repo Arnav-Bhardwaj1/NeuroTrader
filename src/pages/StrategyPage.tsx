@@ -5,18 +5,12 @@ import {
   Play,
   Plus,
   Trash2,
-  ChevronRight,
   TrendingUp,
   TrendingDown,
   BarChart3,
-  History,
-  Info,
-  AlertTriangle,
-  CheckCircle2
+  History
 } from 'lucide-react';
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -25,7 +19,7 @@ import {
   AreaChart,
   Area
 } from 'recharts';
-import { StrategyBacktester, Strategy, StrategyRule, BacktestResults } from '../lib/StrategyBacktester';
+import { StrategyBacktester, type Strategy, type StrategyRule, type BacktestResults } from '../lib/StrategyBacktester';
 import { stockCandlestickData, stocks } from '../lib/mockData';
 import './StrategyPage.css';
 
@@ -75,7 +69,7 @@ const StrategyPage: React.FC = () => {
     }
   };
 
-  const updateRule = (type: 'entry' | 'exit', index: number, field: keyof StrategyRule, value: any) => {
+  const updateRule = (type: 'entry' | 'exit', index: number, field: keyof StrategyRule, value: string | number) => {
     if (type === 'entry') {
       const entryRules = [...strategy.entryRules];
       entryRules[index] = { ...entryRules[index], [field]: value };
@@ -204,7 +198,7 @@ const StrategyPage: React.FC = () => {
                       <YAxis domain={['auto', 'auto']} stroke="#64748b" fontSize={12} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
                       <Tooltip
                         contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
-                        formatter={(value: any) => [`$${parseFloat(value).toLocaleString()}`, 'Portfolio Value']}
+                        formatter={(value: number | string | readonly (string | number)[] | undefined) => [`$${Number(Array.isArray(value) ? (value[0] ?? 0) : (value ?? 0)).toLocaleString()}`, 'Portfolio Value']}
                       />
                       <Area type="monotone" dataKey="value" stroke="var(--accent-primary)" fillOpacity={1} fill="url(#colorValue)" strokeWidth={2} />
                     </AreaChart>
@@ -270,7 +264,7 @@ const StrategyPage: React.FC = () => {
 const RuleItem: React.FC<{
   rule: StrategyRule;
   onRemove: () => void;
-  onUpdate: (field: keyof StrategyRule, value: any) => void;
+  onUpdate: (field: keyof StrategyRule, value: string | number) => void;
 }> = ({ rule, onRemove, onUpdate }) => {
   return (
     <motion.div

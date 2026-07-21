@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express';
+import { type AuthRequest } from '../middleware/auth';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import prisma from '../prisma';
@@ -24,7 +25,7 @@ export const register = async (req: Request, res: Response) => {
 
     const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
     res.status(201).json({ user: { id: user.id, email: user.email, name: user.name }, token });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Registration failed' });
   }
 };
@@ -44,19 +45,20 @@ export const login = async (req: Request, res: Response) => {
       user: { id: user.id, email: user.email, name: user.name, cashBalance: user.cashBalance },
       token
     });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Login failed' });
   }
 };
 
-export const getMe = async (req: any, res: Response) => {
+export const getMe = async (req: AuthRequest, res: Response) => {
   try {
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
       select: { id: true, email: true, name: true, cashBalance: true }
     });
     res.json(user);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch user' });
   }
-}
+};

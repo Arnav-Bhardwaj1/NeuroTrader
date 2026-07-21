@@ -1,18 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { 
   Database, 
   Activity, 
   Layers, 
   Zap, 
-  MousePointer2, 
   Plus, 
   Trash2, 
   Play,
   Save,
   ArrowRight
 } from 'lucide-react';
-import { Node, Connection, VisualGraph, NodeType } from '../../lib/NeuroLogic';
+import { type Node, type Connection, type VisualGraph, type NodeType } from '../../lib/NeuroLogic';
 
 /**
  * NeuroLogicEditor.tsx
@@ -20,7 +19,15 @@ import { Node, Connection, VisualGraph, NodeType } from '../../lib/NeuroLogic';
  * High-performance, glassmorphism-inspired UI built with Framer Motion.
  */
 
-const NODE_TYPES: { type: NodeType; label: string; icon: any; color: string }[] = [
+function generateNodeId(): string {
+  return Math.random().toString(36).substring(2, 9);
+}
+
+function generateConnectionId(): string {
+  return `c-${Date.now()}`;
+}
+
+const NODE_TYPES: { type: NodeType; label: string; icon: React.ComponentType<{ size?: number; color?: string; className?: string }>; color: string }[] = [
   { type: 'MARKET_DATA', label: 'Market Data', icon: Database, color: 'var(--accent-cyan)' },
   { type: 'INDICATOR', label: 'Indicator', icon: Activity, color: 'var(--accent-violet)' },
   { type: 'CONDITION', label: 'Condition', icon: Layers, color: 'var(--accent-amber)' },
@@ -46,7 +53,7 @@ export const NeuroLogicEditor: React.FC = () => {
 
   const addNode = (type: NodeType) => {
     const newNode: Node = {
-      id: Math.random().toString(36).substr(2, 9),
+      id: generateNodeId(),
       type,
       position: { x: 100, y: 100 },
       data: type === 'INDICATOR' ? { indicator: 'RSI', period: 14 } : type === 'CONDITION' ? { operator: '>' } : {},
@@ -74,7 +81,7 @@ export const NeuroLogicEditor: React.FC = () => {
     }
   };
 
-  const startConnection = (id: string, e: React.MouseEvent) => {
+  const startConnection = (id: string) => {
     const node = graph.nodes.find(n => n.id === id);
     if (node) {
       setConnecting({ sourceId: id, startPos: { x: node.position.x + 100, y: node.position.y + 25 } });
@@ -84,7 +91,7 @@ export const NeuroLogicEditor: React.FC = () => {
   const endConnection = (id: string) => {
     if (connecting && connecting.sourceId !== id) {
       const newConn: Connection = {
-        id: `c-${Date.now()}`,
+        id: generateConnectionId(),
         sourceId: connecting.sourceId,
         targetId: id,
       };
@@ -148,7 +155,7 @@ export const NeuroLogicEditor: React.FC = () => {
             key={node.id}
             node={node}
             onDragStart={() => setDraggingNode(node.id)}
-            onConnectStart={(e) => startConnection(node.id, e)}
+            onConnectStart={() => startConnection(node.id)}
             onConnectEnd={() => endConnection(node.id)}
             onDelete={() => deleteNode(node.id)}
           />
@@ -161,7 +168,7 @@ export const NeuroLogicEditor: React.FC = () => {
 const NodeComponent: React.FC<{
   node: Node;
   onDragStart: () => void;
-  onConnectStart: (e: React.MouseEvent) => void;
+  onConnectStart: () => void;
   onConnectEnd: () => void;
   onDelete: () => void;
 }> = ({ node, onDragStart, onConnectStart, onConnectEnd, onDelete }) => {

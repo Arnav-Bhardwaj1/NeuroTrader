@@ -10,8 +10,8 @@ import {
   AreaChart,
   Area
 } from 'recharts';
-import { ShieldAlert, BarChart, Info, Play, AlertTriangle } from 'lucide-react';
-import { StressEngine, SimulationResult } from '../../lib/StressEngine';
+import { ShieldAlert, BarChart, AlertTriangle } from 'lucide-react';
+import { StressEngine, type SimulationResult } from '../../lib/StressEngine';
 
 /**
  * StressTester.tsx
@@ -77,13 +77,13 @@ export const StressTester: React.FC = () => {
     const truncatedPaths = result.paths.slice(0, limit);
     
     return Array(params.days + 1).fill(0).map((_, day) => {
-      const entry: any = { day };
+      const entry: Record<string, number> = { day };
       truncatedPaths.forEach((path, i) => {
         entry[`path${i}`] = path[day];
       });
       return entry;
     });
-  }, [result]);
+  }, [result, params.days]);
 
   return (
     <div className="stress-tester-container">

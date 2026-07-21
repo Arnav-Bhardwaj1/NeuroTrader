@@ -1,3 +1,5 @@
+import { type CandlestickData } from '../types';
+
 /**
  * NeuroLogic.ts
  * Core logic engine for the Visual Strategy Builder.
@@ -10,6 +12,7 @@ export interface Node {
   id: string;
   type: NodeType;
   position: { x: number; y: number };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: Record<string, any>;
 }
 
@@ -29,7 +32,7 @@ export class NeuroLogicEngine {
    * Compiles the visual graph into a usable strategy function.
    * For the purpose of this simulation, we'll evaluate the graph step-by-step.
    */
-  static evaluateGraph(graph: VisualGraph, candleData: any[], currentIndex: number): 'BUY' | 'SELL' | 'NONE' {
+  static evaluateGraph(graph: VisualGraph, candleData: CandlestickData[], currentIndex: number): 'BUY' | 'SELL' | 'NONE' {
     const signalNodes = graph.nodes.filter(n => n.type === 'SIGNAL');
     if (signalNodes.length === 0) return 'NONE';
 
@@ -44,21 +47,25 @@ export class NeuroLogicEngine {
     return 'NONE';
   }
 
-  private static evaluateNode(node: Node, graph: VisualGraph, candleData: any[], currentIndex: number): any {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private static evaluateNode(node: Node, graph: VisualGraph, candleData: CandlestickData[], currentIndex: number): any {
     const incomingConnections = graph.connections.filter(c => c.targetId === node.id);
     const sourceNodes = incomingConnections.map(c => graph.nodes.find(n => n.id === c.sourceId)).filter(Boolean) as Node[];
 
     switch (node.type) {
-      case 'MARKET_DATA':
-        const field = node.data.field || 'close';
-        return candleData[currentIndex][field];
+      case 'MARKET_DATA': {
+        const field = (node.data.field as string) || 'close';
+        const candle = candleData[currentIndex];
+        if (!candle) return 0;
+        return candle[field as keyof CandlestickData] || 0;
+      }
 
       case 'INDICATOR':
         // Simplified: return an indicator value like RSI or SMA
         // In a real app, this would use a TA-Lib implementation
         return this.mockCalculateIndicator(node.data.indicator, node.data.period, candleData, currentIndex);
 
-      case 'CONDITION':
+      case 'CONDITION': {
         const [val1, val2] = sourceNodes.map(n => this.evaluateNode(n, graph, candleData, currentIndex));
         const operator = node.data.operator;
         if (operator === '>') return val1 > val2;
@@ -69,16 +76,21 @@ export class NeuroLogicEngine {
           return prevVal1 <= prevVal2 && val1 > val2;
         }
         return false;
+      }
 
-      case 'LOGIC_GATE':
+      case 'LOGIC_GATE': {
         const inputs = sourceNodes.map(n => this.evaluateNode(n, graph, candleData, currentIndex));
         if (node.data.gate === 'AND') return inputs.every(Boolean);
         if (node.data.gate === 'OR') return inputs.some(Boolean);
         return false;
+      }
 
-      case 'SIGNAL':
-        const hasTrigger = this.evaluateNode(sourceNodes[0], graph, candleData, currentIndex);
+      case 'SIGNAL': {
+        const firstSource = sourceNodes[0];
+        if (!firstSource) return 'NONE';
+        const hasTrigger = this.evaluateNode(firstSource, graph, candleData, currentIndex);
         return hasTrigger ? node.data.action : 'NONE';
+      }
 
       default:
         return null;
@@ -88,7 +100,7 @@ export class NeuroLogicEngine {
   /**
    * Mock calculation for common indicators.
    */
-  private static mockCalculateIndicator(name: string, period: number = 14, data: any[], index: number): number {
+  private static mockCalculateIndicator(name: string, period: number = 14, data: CandlestickData[], index: number): number {
     if (index < period) return data[index].close;
     
     if (name === 'SMA') {

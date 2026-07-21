@@ -4,31 +4,34 @@ import { AuthRequest } from '../middleware/auth';
 import { stocks } from '../mockData';
 
 export const getHoldings = async (req: AuthRequest, res: Response) => {
+  if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+  const userId = req.user.id;
   try {
-    const userId = req.user?.id!;
     const holdings = await prisma.holding.findMany({ where: { userId } });
     res.json(holdings);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch holdings' });
   }
 };
 
 export const getTransactions = async (req: AuthRequest, res: Response) => {
+  if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+  const userId = req.user.id;
   try {
-    const userId = req.user?.id!;
     const transactions = await prisma.transaction.findMany({
       where: { userId },
       orderBy: { timestamp: 'desc' }
     });
     res.json(transactions);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch transactions' });
   }
 };
 
 export const executeTrade = async (req: AuthRequest, res: Response) => {
+  if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+  const userId = req.user.id;
   const { symbol, action, shares } = req.body;
-  const userId = req.user?.id!;
 
   if (!['BUY', 'SELL'].includes(action)) return res.status(400).json({ error: 'Invalid action' });
   if (shares <= 0) return res.status(400).json({ error: 'Invalid shares' });
@@ -45,6 +48,11 @@ export const executeTrade = async (req: AuthRequest, res: Response) => {
     if (action === 'BUY') {
       if (user.cashBalance < totalCost) return res.status(400).json({ error: 'Insufficient funds' });
 
+      const existingHolding = await prisma.holding.findFirst({ where: { userId, symbol } });
+      const existingShares = existingHolding?.shares ?? 0;
+      const existingAvgCost = existingHolding?.avgCost ?? 0;
+      const newAvgCost = (existingAvgCost * existingShares + totalCost) / (existingShares + shares);
+
       await prisma.$transaction([
         prisma.user.update({
           where: { id: userId },
@@ -57,9 +65,7 @@ export const executeTrade = async (req: AuthRequest, res: Response) => {
         prisma.holding.upsert({
           where: { id: `${userId}-${symbol}` }, // We should probably have a unique constraint on userId-symbol
           update: {
-            avgCost: {
-              set: ((await prisma.holding.findFirst({ where: { userId, symbol } })?.avgCost || 0) * (await prisma.holding.findFirst({ where: { userId, symbol } })?.shares || 0) + totalCost) / ((await prisma.holding.findFirst({ where: { userId, symbol } })?.shares || 0) + shares)
-            },
+            avgCost: newAvgCost,
             shares: { increment: shares }
           },
           create: { id: `${userId}-${symbol}`, userId, symbol, shares, avgCost: stock.price }

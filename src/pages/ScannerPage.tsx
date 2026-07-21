@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Activity,
@@ -14,12 +14,8 @@ import type { ScannerData, MarketSector, StockNode } from '../lib/ScannerService
 import './ScannerPage.css';
 
 const ScannerPage: React.FC = () => {
-  const [data, setData] = useState<ScannerData | null>(null);
+  const [data] = useState<ScannerData>(() => ScannerService.getScannerData());
   const [selectedStock, setSelectedStock] = useState<StockNode | null>(null);
-
-  useEffect(() => {
-    setData(ScannerService.getScannerData());
-  }, []);
 
   if (!data) return <div className="loading-state">Initializing NeuroScanner...</div>;
 

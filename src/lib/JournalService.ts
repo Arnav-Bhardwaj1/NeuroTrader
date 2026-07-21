@@ -1,4 +1,4 @@
-import { format, subDays, startOfDay } from 'date-fns';
+import { format, subDays } from 'date-fns';
 
 export interface TradeEntry {
   id: string;

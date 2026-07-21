@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { 
   ScatterChart, 
   Scatter, 
   XAxis, 
   YAxis, 
-  ZAxis, 
   Tooltip, 
   ResponsiveContainer, 
-  Cell,
   Label
 } from 'recharts';
-import { Target, TrendingUp, AlertCircle, Info } from 'lucide-react';
-import { OptimalMath, PortfolioStats, AssetData } from '../../lib/OptimalMath';
-import { stocks } from '../../lib/mockData';
+import { Target, TrendingUp } from 'lucide-react';
+import { OptimalMath, type PortfolioStats, type AssetData } from '../../lib/OptimalMath';
 
 /**
  * PortfolioOptimizer.tsx
@@ -20,16 +18,12 @@ import { stocks } from '../../lib/mockData';
  */
 
 export const PortfolioOptimizer: React.FC = () => {
-  const [selectedAssets, setSelectedAssets] = useState<string[]>(['AAPL', 'MSFT', 'TSLA', 'NVDA']);
+  const [selectedAssets] = useState<string[]>(['AAPL', 'MSFT', 'TSLA', 'NVDA']);
   const [simulations, setSimulations] = useState<PortfolioStats[]>([]);
   const [optimal, setOptimal] = useState<PortfolioStats | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
-  useEffect(() => {
-    calculateFrontier();
-  }, []);
-
-  const calculateFrontier = () => {
+  const calculateFrontier = useCallback(() => {
     setIsCalculating(true);
     
     // In a real app, we'd fetch actual historical data. 
@@ -47,7 +41,14 @@ export const PortfolioOptimizer: React.FC = () => {
       setOptimal(opt);
       setIsCalculating(false);
     }, 600);
-  };
+  }, [selectedAssets]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      calculateFrontier();
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [calculateFrontier]);
 
   return (
     <div className="optimizer-container">
@@ -103,7 +104,7 @@ export const PortfolioOptimizer: React.FC = () => {
                 <Tooltip 
                   cursor={{ strokeDasharray: '3 3' }}
                   contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
-                  formatter={(value: any, name: string) => [`${(parseFloat(value) * 100).toFixed(2)}%`, name]}
+                  formatter={(value: number | string | readonly (string | number)[] | undefined, name?: string | number) => [`${(Number(Array.isArray(value) ? (value[0] ?? 0) : (value ?? 0)) * 100).toFixed(2)}%`, String(name ?? '')]}
                 />
                 <Scatter name="Portfolios" data={simulations} fill="var(--accent-cyan-dim)" opacity={0.3} shape="circle" />
                 {optimal && (

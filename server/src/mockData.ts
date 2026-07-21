@@ -1,4 +1,4 @@
-import type { Stock, CandlestickData, Holding, Transaction, MarketIndex, Signal, SectorPerformance } from '../types';
+import type { Stock, CandlestickData, Holding, Transaction, MarketIndex, Signal, SectorPerformance } from './types';
 
 // ---- Generate realistic candlestick data ----
 function generateCandlestickData(basePrice: number, days: number, volatility: number = 0.02): CandlestickData[] {
@@ -19,7 +19,7 @@ function generateCandlestickData(basePrice: number, days: number, volatility: nu
     const volume = Math.floor(Math.random() * 50000000) + 10000000;
 
     data.push({
-      time: date.toISOString().split('T')[0],
+      time: date.toISOString().split('T')[0] ?? '',
       open: +open.toFixed(2),
       high: +high.toFixed(2),
       low: +low.toFixed(2),

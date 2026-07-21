@@ -1,9 +1,31 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import type { Stock, MarketIndex, Signal, SectorPerformance, PortfolioStats, Holding, Transaction } from '../types';
 
-export const DataContext = createContext<any>(null);
+export interface ActivityItem {
+  id: string;
+  icon: string;
+  text: string;
+  detail: string;
+  time: string;
+  type: 'signal' | 'sentiment' | 'alert' | 'prediction' | 'portfolio';
+}
+
+export interface AppDataContextType {
+  stocks: Stock[];
+  marketIndices: MarketIndex[];
+  signals: Signal[];
+  sectorPerformance: SectorPerformance[];
+  activityFeed: ActivityItem[];
+  portfolioStats: PortfolioStats;
+  holdings: Holding[];
+  transactions: Transaction[];
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const DataContext = createContext<AppDataContextType | null>(null);
 
 export function DataProvider({ children }: { children: ReactNode }) {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<AppDataContextType | null>(null);
 
   useEffect(() => {
     Promise.all([
@@ -25,4 +47,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
   return <DataContext.Provider value={data}>{children}</DataContext.Provider>;
 }
 
-export const useAppContext = () => useContext(DataContext);
+// eslint-disable-next-line react-refresh/only-export-components
+export const useAppContext = () => {
+  const ctx = useContext(DataContext);
+  if (!ctx) throw new Error('useAppContext must be used within DataProvider');
+  return ctx;
+};

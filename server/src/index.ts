@@ -24,8 +24,10 @@ app.use('/api', apiRoutes);
 app.get('/', (req, res) => res.json({ status: 'NeuroTrader API is running' }));
 
 // Error handling
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error(err.stack);
+app.use((err: unknown, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  void next;
+  const errorStack = err instanceof Error ? err.stack : String(err);
+  console.error(errorStack);
   res.status(500).json({ error: 'Something went wrong!' });
 });
 

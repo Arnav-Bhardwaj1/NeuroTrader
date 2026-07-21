@@ -99,7 +99,7 @@ export default function PortfolioPage() {
               </Pie>
               <Tooltip
                 contentStyle={{ background: '#1a2035', border: '1px solid rgba(55,65,81,0.5)', borderRadius: 8, fontSize: 12 }}
-                formatter={(value: any) => formatCurrency(Number(value))}
+                formatter={(value: number | string | readonly (string | number)[] | undefined) => formatCurrency(Number(Array.isArray(value) ? (value[0] ?? 0) : (value ?? 0)))}
               />
               <Legend wrapperStyle={{ fontSize: 11 }} />
             </PieChart>

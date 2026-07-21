@@ -1,4 +1,4 @@
-import type { PredictionData, SentimentData, RiskData } from '../types';
+import type { PredictionData, SentimentData, RiskData } from './types';
 import { stockCandlestickData, stocks } from './mockData';
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -8,7 +8,9 @@ export async function getAIPrediction(symbol: string): Promise<PredictionData> {
   await delay(800 + Math.random() * 600);
   const candles = stockCandlestickData[symbol];
   if (!candles || candles.length === 0) throw new Error('No data');
-  const lastPrice = candles[candles.length - 1].close;
+  const lastCandle = candles[candles.length - 1];
+  if (!lastCandle) throw new Error('No data');
+  const lastPrice = lastCandle.close;
   const direction = Math.random() > 0.35 ? 'bullish' : Math.random() > 0.5 ? 'bearish' : 'neutral';
   const multiplier = direction === 'bullish' ? 1 + Math.random() * 0.15 : direction === 'bearish' ? 1 - Math.random() * 0.1 : 1 + (Math.random() - 0.5) * 0.04;
   const targetPrice = +(lastPrice * multiplier).toFixed(2);
@@ -25,7 +27,7 @@ export async function getAIPrediction(symbol: string): Promise<PredictionData> {
     const d = new Date(now);
     d.setDate(d.getDate() + i);
     price += step + (Math.random() - 0.5) * Math.abs(step) * 0.5;
-    const t = d.toISOString().split('T')[0];
+    const t = d.toISOString().split('T')[0] ?? '';
     predictionLine.push({ time: t, value: +price.toFixed(2) });
     upperBand.push({ time: t, value: +(price * (1 + 0.03 + (i / 30) * 0.04)).toFixed(2) });
     lowerBand.push({ time: t, value: +(price * (1 - 0.03 - (i / 30) * 0.04)).toFixed(2) });
@@ -45,8 +47,8 @@ export async function getAIPrediction(symbol: string): Promise<PredictionData> {
       'Consolidating in a tight range. Mixed signals from technical and fundamental indicators. Wait for breakout confirmation.',
     ],
   };
-  const arr = reasons[direction];
-  const reasoning = arr[Math.floor(Math.random() * arr.length)];
+  const arr = reasons[direction] ?? [];
+  const reasoning = arr[Math.floor(Math.random() * arr.length)] ?? '';
 
   return { targetPrice, confidence, direction, timeframe: '30 days', reasoning, predictionLine, upperBand, lowerBand };
 }
@@ -98,7 +100,6 @@ export async function getAISentiment(symbol: string): Promise<SentimentData> {
 
 // ---- Risk Assessment ----
 export async function getAIRisk(symbol: string): Promise<RiskData> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   void symbol;
   await delay(500 + Math.random() * 400);
   const volatility = +(10 + Math.random() * 40).toFixed(1);
@@ -135,15 +136,15 @@ const chatResponses: Record<string, string[]> = {
 export async function getAIChatResponse(message: string): Promise<string> {
   await delay(1000 + Math.random() * 1500);
   const lower = message.toLowerCase();
-  let pool = chatResponses.default;
+  let pool = chatResponses.default ?? [];
   if (lower.includes('bullish') || lower.includes('buy') || lower.includes('upside') || lower.includes('optimistic')) {
-    pool = chatResponses.bullish;
+    pool = chatResponses.bullish ?? [];
   } else if (lower.includes('bearish') || lower.includes('sell') || lower.includes('risk') || lower.includes('crash') || lower.includes('downside')) {
-    pool = chatResponses.bearish;
+    pool = chatResponses.bearish ?? [];
   } else if (stocks.some((s) => lower.includes(s.symbol.toLowerCase()) || lower.includes(s.name.toLowerCase()))) {
-    pool = chatResponses.stock;
+    pool = chatResponses.stock ?? [];
   }
-  return pool[Math.floor(Math.random() * pool.length)];
+  return pool[Math.floor(Math.random() * pool.length)] ?? '';
 }
 
 // ---- Market Summary ----

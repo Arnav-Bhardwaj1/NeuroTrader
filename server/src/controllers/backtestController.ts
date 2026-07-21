@@ -13,7 +13,8 @@ export const runBacktest = async (req: AuthRequest, res: Response) => {
       initialCapital: initialCapital || 10000
     });
     res.json(result);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    res.status(400).json({ error: errorMessage });
   }
 };

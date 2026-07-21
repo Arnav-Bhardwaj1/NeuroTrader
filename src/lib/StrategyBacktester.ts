@@ -1,4 +1,4 @@
-import type { CandlestickData } from './types';
+import type { CandlestickData } from '../types';
 
 export type IndicatorType = 'SMA' | 'EMA' | 'RSI' | 'MACD';
 export type Operator = '>' | '<' | 'CROSSES_ABOVE' | 'CROSSES_BELOW';
@@ -84,8 +84,8 @@ export class StrategyBacktester {
    */
   static rsi(data: number[], period: number = 14): number[] {
     const results: number[] = [];
-    let gains: number[] = [];
-    let losses: number[] = [];
+    const gains: number[] = [];
+    const losses: number[] = [];
 
     for (let i = 1; i < data.length; i++) {
       const diff = data[i] - data[i - 1];
@@ -202,7 +202,7 @@ export class StrategyBacktester {
       });
     }
 
-    const finalValue = capital + position * currentPrice;
+    const finalValue = capital + position * (prices[prices.length - 1] ?? 0);
     const totalReturn = finalValue - initialCapital;
 
     // Performance metrics

@@ -98,7 +98,6 @@ export async function getAISentiment(symbol: string): Promise<SentimentData> {
 
 // ---- Risk Assessment ----
 export async function getAIRisk(symbol: string): Promise<RiskData> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   void symbol;
   await delay(500 + Math.random() * 400);
   const volatility = +(10 + Math.random() * 40).toFixed(1);
