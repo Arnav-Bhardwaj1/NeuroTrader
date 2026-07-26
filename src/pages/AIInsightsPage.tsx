@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Brain, Send, Loader2, Target, Zap,
+  Brain, Send, Loader2, Target, Zap, BrainCircuit, Sparkles
 } from 'lucide-react';
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
 } from 'recharts';
 import { signals, stocks } from '../lib/mockData';
 import { getAIMarketSummary, getAIChatResponse } from '../lib/mockAI';
+import { NeuroPatternEngine } from '../lib/NeuroPatternEngine';
 import type { ChatMessage } from '../types';
 
 /* ── Prediction Accuracy Data ─────────────────────────────────── */
@@ -44,6 +45,14 @@ export default function AIInsightsPage() {
 
   const suggestions = ['What sectors are outperforming?', 'Give me a bearish risk assessment', 'Which stocks have the strongest buy signals?'];
 
+  const neuralAnalysis = NeuroPatternEngine.analyze(
+    'NVDA',
+    '1D',
+    [125, 122, 120, 118, 121, 126, 129, 132, 130, 135],
+    [1500000, 1800000, 2100000, 1900000, 2400000, 3100000, 2800000, 3500000, 2900000, 4200000],
+    0.85
+  );
+
   return (
     <div>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ marginBottom: 24 }}>
@@ -52,6 +61,44 @@ export default function AIInsightsPage() {
           AI Insights
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: 14 }}>AI-generated market analysis, signals, and predictions</p>
+      </motion.div>
+
+      {/* Neural Pattern Spotlight Banner */}
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+        style={{
+          padding: '16px 20px', borderRadius: 'var(--radius-lg)', background: 'var(--gradient-card)',
+          border: '1px solid var(--border-glass)', marginBottom: 20, display: 'flex',
+          alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16
+        }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{
+            width: 40, height: 40, borderRadius: 10, background: 'var(--accent-cyan-dim)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <BrainCircuit size={20} color="var(--accent-cyan)" />
+          </div>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <h3 style={{ fontSize: 15, fontWeight: 800, margin: 0 }}>NeuroPattern AI Engine Spotlight</h3>
+              <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 4, background: 'rgba(0,243,255,0.15)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                {neuralAnalysis.detectedPatterns[0]?.confidence || 91.6}% MATCH
+              </span>
+            </div>
+            <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '2px 0 0 0' }}>
+              Convolutional DTW detected a <strong>{neuralAnalysis.detectedPatterns[0]?.label || 'Double Bottom Reversal'}</strong> on {neuralAnalysis.symbol} with ${neuralAnalysis.detectedPatterns[0]?.targetPrice || 142.50} price target.
+            </p>
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>Autoencoder Anomaly: <strong style={{ color: 'var(--accent-green)' }}>{neuralAnalysis.anomalyScore}% ({neuralAnalysis.isAnomalyAlert ? 'Anomaly' : 'Normal'})</strong></span>
+          <button style={{
+            padding: '8px 16px', borderRadius: 'var(--radius-md)', background: 'var(--accent-cyan-dim)',
+            border: '1px solid var(--border-glass)', color: 'var(--accent-cyan)', fontSize: 12, fontWeight: 700,
+            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6
+          }} onClick={() => window.location.href = '/terminal'}>
+            <Sparkles size={14} /> Open AI Studio
+          </button>
+        </div>
       </motion.div>
 
       {/* AI Market Summary */}

@@ -8,30 +8,33 @@ import {
   Maximize2, 
   Minimize2,
   Settings2,
-  Layers
+  Layers,
+  BrainCircuit
 } from 'lucide-react';
 import NeuroLogicEditor from '../components/terminal/NeuroLogicEditor';
 import PortfolioOptimizer from '../components/terminal/PortfolioOptimizer';
 import StressTester from '../components/terminal/StressTester';
+import NeuroPatternStudio from '../components/terminal/NeuroPatternStudio';
 import './TerminalPage.css';
 
 /**
  * TerminalPage.tsx
  * The "NeuroTerminal" Command Center.
- * A tabbed workspace hosting the Strategy Builder, Portfolio Optimizer, and Stress Tester.
+ * A tabbed workspace hosting the AI Pattern Studio, Strategy Builder, Portfolio Optimizer, and Stress Tester.
  */
 
 const TABS = [
+  { id: 'pattern', label: 'AI Pattern Studio', icon: BrainCircuit, component: NeuroPatternStudio },
   { id: 'logic', label: 'Logic Builder', icon: Workflow, component: NeuroLogicEditor },
   { id: 'optimizer', label: 'Portfolio Optimizer', icon: Target, component: PortfolioOptimizer },
   { id: 'stress', label: 'Stress Tester', icon: ShieldAlert, component: StressTester },
 ];
 
 export const TerminalPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('logic');
+  const [activeTab, setActiveTab] = useState('pattern');
   const [fullscreen, setFullscreen] = useState(false);
 
-  const ActiveComponent = TABS.find(t => t.id === activeTab)?.component || NeuroLogicEditor;
+  const ActiveComponent = TABS.find(t => t.id === activeTab)?.component || NeuroPatternStudio;
 
   return (
     <div className={`terminal-page ${fullscreen ? 'fullscreen' : ''}`}>
