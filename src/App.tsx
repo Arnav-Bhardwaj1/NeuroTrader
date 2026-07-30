@@ -16,8 +16,7 @@ import StrategyPage from './pages/StrategyPage';
 import JournalPage from './pages/JournalPage';
 import ScannerPage from './pages/ScannerPage';
 import TerminalPage from './pages/TerminalPage';
-
-
+import OrderFlowRadar from './components/terminal/OrderFlowRadar';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -43,6 +42,7 @@ function AppRoutes() {
         <Route path="journal" element={<JournalPage />} />
         <Route path="scanner" element={<ScannerPage />} />
         <Route path="terminal" element={<TerminalPage />} />
+        <Route path="order-flow" element={<div style={{ padding: 24 }}><OrderFlowRadar /></div>} />
       </Route>
 
 

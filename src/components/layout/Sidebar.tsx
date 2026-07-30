@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight, BrainCircuit, BookOpen, Activity, Terminal } from 'lucide-react';
+import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight, BrainCircuit, BookOpen, Activity, Terminal, Zap } from 'lucide-react';
 
 
 import { useAuth } from '../../lib/auth';
@@ -16,10 +16,9 @@ const navItems = [
   { path: '/scanner', label: 'Scanner', icon: Activity },
   { path: '/strategy', label: 'Strategy', icon: BrainCircuit },
   { path: '/terminal', label: 'Terminal', icon: Terminal },
-
+  { path: '/order-flow', label: 'Order Flow Radar', icon: Zap },
   { path: '/journal', label: 'Journal', icon: BookOpen },
   { path: '/settings', label: 'Settings', icon: Settings },
-
 ];
 
 export default function Sidebar() {

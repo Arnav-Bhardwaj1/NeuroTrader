@@ -44,4 +44,12 @@ router.delete('/watchlists/:id', authMiddleware, watchlist.deleteWatchlist);
 // Backtesting
 router.post('/backtest', authMiddleware, backtest.runBacktest);
 
+// Order Flow & Risk Radar
+import * as orderFlow from '../controllers/orderFlowController';
+router.get('/orderflow/prints/:symbol?', orderFlow.getDarkPoolPrints);
+router.get('/orderflow/gamma/:symbol?', orderFlow.getOptionGammaProfile);
+router.get('/orderflow/l2/:symbol?', orderFlow.getLevel2Book);
+router.post('/orderflow/execution/simulate', orderFlow.simulateExecution);
+router.get('/orderflow/risk/:symbol?', orderFlow.getMonteCarloRisk);
+
 export default router;
