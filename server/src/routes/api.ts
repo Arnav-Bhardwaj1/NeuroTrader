@@ -52,4 +52,9 @@ router.get('/orderflow/l2/:symbol?', orderFlow.getLevel2Book);
 router.post('/orderflow/execution/simulate', orderFlow.simulateExecution);
 router.get('/orderflow/risk/:symbol?', orderFlow.getMonteCarloRisk);
 
+// NeuroCopilot AI Engine
+import * as copilot from '../controllers/copilotController';
+router.get('/copilot/signals', copilot.getCopilotSignals);
+router.post('/copilot/simulate', copilot.simulateCopilotMonteCarlo);
+
 export default router;

@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight, BrainCircuit, BookOpen, Activity, Terminal, Zap } from 'lucide-react';
+import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight, BrainCircuit, BookOpen, Activity, Terminal, Zap, Bot } from 'lucide-react';
 
 
 import { useAuth } from '../../lib/auth';
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { path: '/copilot', label: 'NeuroCopilot', icon: Bot },
   { path: '/watchlists', label: 'Watchlists', icon: Star },
   { path: '/stocks', label: 'Stocks', icon: BarChart3 },
   { path: '/portfolio', label: 'Portfolio', icon: Briefcase },

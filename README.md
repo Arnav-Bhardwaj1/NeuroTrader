@@ -1,47 +1,181 @@
-# NeuroTrader
+# NeuroTrader 🚀
 
-An AI-powered, immersive market analysis and paper trading platform built for the modern traders.
+An AI-powered, immersive market analysis, paper trading, and quantitative engineering platform built for modern traders, researchers, and algorithmic strategists.
 
-## Features
+![NeuroTrader Platform](https://img.shields.io/badge/Platform-NeuroTrader-06D6A0?style=for-the-badge)
+![React](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript)
+![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?style=for-the-badge&logo=vite)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)
 
-- **Rich Dashboard**: Enjoy a real-time feel with animated counters, sparklines, and market indices tracking. Get a bird’s eye view with an active AI signal feed.
-- **AI Insights**: Communicate with a mock AI analyst to generate market summaries, view sentiment heatmaps across sectors, and assess risk with confidence gauges.
-- **Detailed Stock Analysis**: Dive deep into individual equities with interactive Candlestick Charts powered by `lightweight-charts` and a dedicated AI breakdown (Sentiment, Risk, Predictions).
-- **Paper Trading**: Simulate buying and selling directly from the stock view to test strategies without real capital. Track estimated costs and current available cash.
-- **Custom Watchlists**: Create, edit, and manage personalized lists to track your favorite tickers in grid or list views.
-- **Global Market News**: Stay informed with categorized, real-time mock news featuring AI-powered Bullish/Bearish impact scoring.
-- **Premium UI**: Experience a sleek, modern, glassmorphism-inspired dark mode interface built with React, Framer Motion, and fine-tuned custom CSS.
+---
 
-## Tech Stack
+## 🌟 Overview & Platform Status
 
-- **Frontend**: React 18, TypeScript, Vite
-- **Styling**: Vanilla CSS with predefined CSS variables, `framer-motion` for micro-animations and page transitions
-- **Routing**: `react-router-dom`
-- **Charting**: `recharts` for generic data visualizations, `lightweight-charts` for high-performance financial candlestick charts
+**NeuroTrader** is a state-of-the-art web application and backend platform combining machine learning analytics, options gamma exposure profiling, microstructural order flow analysis, stochastic Monte Carlo risk modeling, and automated paper trading. Designed with futuristic dark mode glassmorphism aesthetics and micro-animations, NeuroTrader provides professional-grade tools directly in the browser.
+
+---
+
+## 🔥 Key Feature Modules
+
+### 1. 🤖 NeuroCopilot AI Studio (`/copilot`) — [NEW FEATURE]
+An advanced quantitative command center hosting 4 interactive sub-systems:
+- **AI Signal Synthesizer**: Multi-asset trade signals (Equities, Crypto, Forex) with confidence scores, multi-timeframe targets (Entry, Stop Loss, TP1, TP2), Kelly Criterion position sizing recommendations, and simulated order execution.
+- **Monte Carlo & Macro Risk Matrix**: 1,000-path stochastic trajectory simulations (Geometric Brownian Motion + Jump Diffusion), 95%/99% Value-at-Risk (VaR), Conditional VaR (Expected Tail Loss), and macro shock scenario injection (Fed Hawkish Hikes, Tech De-leveraging, Oil Supply Shocks).
+- **GEX & Dark Pool Radar**: Options Gamma Exposure (Call Wall, Put Wall, Zero Gamma Flip) strike distribution charts and real-time institutional dark pool volume buy/sell delta tracking.
+- **Autonomous Strategy Automation**: Visual IF-THEN algorithmic trigger rule builder with live trigger status, win rate tracking, and execution logging.
+
+### 2. 💻 NeuroTerminal & Quantitative Workspace (`/terminal`)
+A multi-tab algorithmic environment featuring:
+- **AI Pattern Studio**: Dynamic Time Warping (DTW) pattern recognition, convolutional feature scoring, and Transformer self-attention weight matrix visualization.
+- **Order Flow & Risk Radar**: Deep microstructural liquidity analysis.
+- **Logic Builder**: Drag-and-drop visual quantitative node editor.
+- **Portfolio Optimizer & Stress Tester**: Mean-variance portfolio frontier optimization and downside stress testing.
+
+### 3. ⚡ Order Flow Radar (`/order-flow`)
+- Real-time dark pool print scanner with institutional block flow detection.
+- Level 2 order book depth visualization with bid/ask imbalance ladders.
+- Options dealer gamma flip levels and order execution latency simulation.
+
+### 4. 📊 Strategy Builder & Backtester (`/strategy`)
+- Custom rule editor supporting SMA, EMA, RSI indicators, custom periods, and breakout operators.
+- Historical backtesting engine generating portfolio equity curves, win rates, maximum drawdowns, and trade history logs.
+
+### 5. 🔍 NeuroScanner (`/scanner`)
+- Interactive sector performance heatmaps (Technology, Healthcare, Financials, Energy, Consumer Discretionary).
+- Real-time sector momentum meters, AI sentiment scoring, and Alpha Opportunity notifications.
+- Stock overlay modal for instant metrics and quick trade triggers.
+
+### 6. 🧠 AI Insights & Analyst Chat (`/ai-insights`)
+- Real-time market summary generation powered by AI models.
+- Sector sentiment heatmaps and directional confidence gauges.
+- Interactive AI Analyst chat assistant for custom equity queries.
+
+### 7. 📈 Detailed Stock Analysis & Paper Trading (`/stocks`, `/stocks/:symbol`)
+- High-performance financial Candlestick Charts powered by `lightweight-charts`.
+- Interactive paper trading order ticket (Buy/Sell, market/limit orders, estimated cost calculation).
+- Fundamental stats, company profile, and AI Sentiment / Risk scores.
+
+### 8. 💼 Portfolio Management (`/portfolio`)
+- Real-time portfolio performance tracking, equity breakdown charts, asset allocation pie graphs.
+- Holdings table with live unrealized gain/loss and position management.
+- Complete paper trading transaction history log.
+
+### 9. ⭐️ Custom Watchlists (`/watchlists`)
+- Create, rename, edit, and organize custom stock watchlists in grid or list view.
+- Live price change badges and sparkline indicators.
+
+### 10. 📰 Global Market News (`/news`)
+- Filtered news feed across Equities, Crypto, Forex, and Macro Economy.
+- AI Bullish / Bearish impact scoring per news item.
+
+### 11. 📖 Trading Journal (`/journal`)
+- Log paper trades, trade rationale, emotion ratings, and outcome tags.
+- Analytics on trader performance and decision discipline.
+
+### 12. ⚙️ Settings (`/settings`)
+- User profile management, security settings, notification triggers, and default paper trading capital configuration.
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- **Framework**: React 19, TypeScript 5.9, Vite 8
+- **Styling**: Custom CSS design system with CSS Variables, dark glassmorphic components, custom scrollbars, and keyframe animations
+- **Animations**: `framer-motion` for fluid page transitions, modal overlays, and layout layoutId animations
+- **Routing**: `react-router-dom` v7
+- **Data Visualization**: `recharts` for quantitative area/bar charts & `lightweight-charts` for interactive financial candlesticks
 - **Icons**: `lucide-react`
 
-## Getting Started
+### Backend
+- **Runtime**: Node.js & Express (TypeScript)
+- **Database / ORM**: Prisma ORM with SQLite / PostgreSQL support
+- **Services**: Quantitative simulation services, order flow engines, mock AI generation modules, and REST API controllers
 
-1. **Install Dependencies**
-   \`\`\`bash
-   npm install
-   \`\`\`
+---
 
-2. **Run Development Server**
-   \`\`\`bash
-   npm run dev
-   \`\`\`
+## 📂 Project Structure
 
-3. **Open in Browser**
-   Navigate to `http://localhost:5173` to explore NeuroTrader.
+```
+NeuroTrader/
+├── public/                 # Static public assets
+├── server/                 # Express backend server
+│   ├── src/
+│   │   ├── controllers/    # API endpoint controllers (copilot, orderFlow, ai, auth, portfolio, etc.)
+│   │   ├── middleware/     # JWT authentication & request validation
+│   │   ├── routes/         # Express API router (`/api/...`)
+│   │   ├── services/       # Order flow simulation & quantitative engines
+│   │   ├── mockAI.ts       # AI analyst simulation engine
+│   │   ├── mockData.ts     # Initial market & stock mock data
+│   │   └── index.ts        # Express server entry point
+│   ├── prisma/             # Prisma schema & database migrations
+│   └── package.json        # Backend dependencies & scripts
+├── src/                    # Frontend React application
+│   ├── components/
+│   │   ├── copilot/        # NeuroCopilot Studio (Signals, Monte Carlo, GEX, Automation)
+│   │   ├── layout/         # DashboardLayout & responsive Sidebar
+│   │   └── terminal/       # NeuroPatternStudio, OrderFlowRadar, LogicEditor, etc.
+│   ├── context/            # Global React context providers
+│   ├── lib/                # Core engines (NeuroCopilotEngine, StrategyBacktester, ScannerService, auth)
+│   ├── pages/              # Main application views (NeuroCopilotPage, Dashboard, Terminal, Stocks, etc.)
+│   ├── types/              # TypeScript data interfaces
+│   ├── App.tsx             # Main routing configuration
+│   ├── index.css           # Design tokens, variables, & utility classes
+│   └── main.tsx            # React application entry point
+├── package.json            # Frontend dependencies & scripts
+└── README.md               # Platform documentation
+```
 
-## Project Structure
+---
 
-- `src/pages/`: Contains all main application views (`DashboardPage`, `PortfolioPage`, `AIInsightsPage`, `StocksPage`, `StockDetailPage`, `WatchlistPage`, `NewsPage`, `SettingsPage`, etc.)
-- `src/components/layout/`: Includes `Sidebar` and `DashboardLayout` for the main structural scaffolding.
-- `src/lib/`: Contains mocked data (`mockData.ts`), AI simulants (`mockAI.ts`), utility functions, and mock authentication structures.
-- `src/index.css`: The central nervous system of styling and design tokens.
+## 🚀 Getting Started
 
-## License
+### 1. Prerequisites
+- **Node.js**: v18.x or higher
+- **npm**: v9.x or higher
 
-MIT License. Feel free to fork, build upon, or use this as inspiration for your own fintech applications.
+### 2. Installation
+
+Clone the repository and install dependencies for both frontend and backend:
+
+```bash
+# Install frontend dependencies
+npm install
+
+# Install backend dependencies
+cd server
+npm install
+cd ..
+```
+
+### 3. Running the Application
+
+#### Start Frontend Development Server:
+```bash
+npm run dev
+```
+Navigate to `http://localhost:5173` to explore NeuroTrader.
+
+#### Start Backend Express API Server:
+```bash
+cd server
+npm run dev
+```
+Backend API will be running on `http://localhost:5000/api`.
+
+### 4. Build & Linting
+
+```bash
+# Type check and build frontend production bundle
+npm run build
+
+# Run ESLint check across codebase
+npm run lint
+```
+
+---
+
+## 📄 License
+
+MIT License. Designed for quantitative finance enthusiasts, paper traders, and AI developers.
