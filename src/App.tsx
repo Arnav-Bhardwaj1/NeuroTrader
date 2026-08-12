@@ -17,6 +17,7 @@ import JournalPage from './pages/JournalPage';
 import ScannerPage from './pages/ScannerPage';
 import TerminalPage from './pages/TerminalPage';
 import NeuroCopilotPage from './pages/NeuroCopilotPage';
+import NeuroBacktestPage from './pages/NeuroBacktestPage';
 import OrderFlowRadar from './components/terminal/OrderFlowRadar';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -37,6 +38,7 @@ function AppRoutes() {
         <Route path="portfolio" element={<PortfolioPage />} />
         <Route path="ai-insights" element={<AIInsightsPage />} />
         <Route path="copilot" element={<NeuroCopilotPage />} />
+        <Route path="backtest-lab" element={<NeuroBacktestPage />} />
         <Route path="watchlists" element={<WatchlistPage />} />
         <Route path="news" element={<NewsPage />} />
         <Route path="settings" element={<SettingsPage />} />

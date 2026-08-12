@@ -57,4 +57,9 @@ import * as copilot from '../controllers/copilotController';
 router.get('/copilot/signals', copilot.getCopilotSignals);
 router.post('/copilot/simulate', copilot.simulateCopilotMonteCarlo);
 
+// NeuroQuant Backtest Laboratory
+import * as backtestLab from '../controllers/backtestLabController';
+router.get('/backtest-lab/replay', backtestLab.getReplaySeries);
+router.get('/backtest-lab/optimize', backtestLab.getOptimizationGrid);
+
 export default router;
