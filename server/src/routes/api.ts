@@ -62,4 +62,9 @@ import * as backtestLab from '../controllers/backtestLabController';
 router.get('/backtest-lab/replay', backtestLab.getReplaySeries);
 router.get('/backtest-lab/optimize', backtestLab.getOptimizationGrid);
 
+// NeuroMacro Intelligence Studio
+import * as macroLab from '../controllers/macroLabController';
+router.get('/macro-lab/yields', macroLab.getYieldCurveData);
+router.get('/macro-lab/liquidity', macroLab.getMacroLiquidity);
+
 export default router;

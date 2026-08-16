@@ -12,75 +12,82 @@ An AI-powered, immersive market analysis, paper trading, and quantitative engine
 
 ## 🌟 Overview & Platform Status
 
-**NeuroTrader** is a state-of-the-art web application and backend platform combining machine learning analytics, options gamma exposure profiling, microstructural order flow analysis, stochastic Monte Carlo risk modeling, event-driven backtesting replay, and automated paper trading. Designed with futuristic dark mode glassmorphism aesthetics and micro-animations, NeuroTrader provides professional-grade tools directly in the browser.
+**NeuroTrader** is a state-of-the-art web application and backend platform combining machine learning analytics, options gamma exposure profiling, microstructural order flow analysis, stochastic Monte Carlo risk modeling, event-driven backtesting replay, global macro liquidity tracking, and automated paper trading. Designed with futuristic dark mode glassmorphism aesthetics and micro-animations, NeuroTrader provides professional-grade tools directly in the browser.
 
 ---
 
-## 🔥 Key Feature Modules (13 Full Modules)
+## 🔥 Key Feature Modules (14 Full Modules)
 
-### 1. 🧪 NeuroQuant Backtest & Strategy Replay Laboratory (`/backtest-lab`) — [NEW FEATURE]
+### 1. 🌐 NeuroMacro & Cross-Asset Yield Laboratory (`/macro-lab`) — [NEW FEATURE]
+A cross-market macroeconomic intelligence & statistical arbitrage studio with 4 interactive panes:
+- **Global Yield Curve & Recession Inversion Radar**: Treasury Yield Curve term structure visualizer (1M to 30Y spreads), 10Y-2Y Spread historical tracking, and Probit model 12-month Recession Probability meter.
+- **7x7 Rolling Cross-Asset Correlation Heatmap**: Interactive multi-asset correlation matrix (Equities, Tech, Gold, Crude Oil, 10Y Treasury, BTC, USD Index DXY) with dynamic rolling window sliders (30D, 90D, 180D).
+- **Fed Net Liquidity & Money Supply Barometer**: Federal Reserve Net Liquidity Index (Balance Sheet minus Reverse Repo minus Treasury General Account TGA) mapped against S&P 500 price action.
+- **Statistical Arbitrage & Cointegrated Pairs Scanner**: Cointegration Z-score spread scanner generating mean-reversion pairs trade signals (Long Asset A / Short Asset B).
+
+### 2. 🧪 NeuroQuant Backtest & Strategy Replay Laboratory (`/backtest-lab`)
 A high-frequency quantitative replay studio with 4 interactive panes:
-- **Strategy Tick & Candle Replay Engine**: Frame-by-frame replay player (Play/Pause, 1x/2x/5x/10x speeds) with buy/sell execution markers, synchronized equity curves, dynamic P&L odometers, and fill log feeds.
+- **Strategy Tick & Candle Replay Engine**: Frame-by-frame replay player (Play/Pause, 1x/2x/5x speeds) with buy/sell execution markers, synchronized equity curves, dynamic P&L odometers, and fill log feeds.
 - **2D Multi-Factor Parameter Optimization Surface**: 2D parameter heatmap matrix (e.g. Short MA vs Long MA) for discovering optimal Sharpe ratio and total return sweet spots.
 - **Walk-Forward Diagnostics & Overfitting Engine**: In-sample (70%) vs Out-of-sample (30%) curve comparison, Probability of Backtest Overfitting (PBO) via 500 Monte Carlo trade permutations, and Strategy Robustness score (A+ to F).
 - **Multi-Asset Portfolio Basket & Benchmark Comparison**: Backtest strategies across multi-asset allocation baskets (Equities, Crypto, SPY Benchmark) with rebalancing logic (Daily, Weekly, Monthly).
 
-### 2. 🤖 NeuroCopilot AI Studio (`/copilot`)
+### 3. 🤖 NeuroCopilot AI Studio (`/copilot`)
 An advanced quantitative command center hosting 4 interactive sub-systems:
 - **AI Signal Synthesizer**: Multi-asset trade signals (Equities, Crypto, Forex) with confidence scores, multi-timeframe targets (Entry, Stop Loss, TP1, TP2), Kelly Criterion position sizing recommendations, and simulated order execution.
 - **Monte Carlo & Macro Risk Matrix**: 1,000-path stochastic trajectory simulations (Geometric Brownian Motion + Jump Diffusion), 95%/99% Value-at-Risk (VaR), Conditional VaR (Expected Tail Loss), and macro shock scenario injection (Fed Hawkish Hikes, Tech De-leveraging, Oil Supply Shocks).
 - **GEX & Dark Pool Radar**: Options Gamma Exposure (Call Wall, Put Wall, Zero Gamma Flip) strike distribution charts and real-time institutional dark pool volume buy/sell delta tracking.
 - **Autonomous Strategy Automation**: Visual IF-THEN algorithmic trigger rule builder with live trigger status, win rate tracking, and execution logging.
 
-### 3. 💻 NeuroTerminal & Quantitative Workspace (`/terminal`)
+### 4. 💻 NeuroTerminal & Quantitative Workspace (`/terminal`)
 A multi-tab algorithmic environment featuring:
 - **AI Pattern Studio**: Dynamic Time Warping (DTW) pattern recognition, convolutional feature scoring, and Transformer self-attention weight matrix visualization.
 - **Order Flow & Risk Radar**: Deep microstructural liquidity analysis.
 - **Logic Builder**: Drag-and-drop visual quantitative node editor.
 - **Portfolio Optimizer & Stress Tester**: Mean-variance portfolio frontier optimization and downside stress testing.
 
-### 4. ⚡ Order Flow Radar (`/order-flow`)
+### 5. ⚡ Order Flow Radar (`/order-flow`)
 - Real-time dark pool print scanner with institutional block flow detection.
 - Level 2 order book depth visualization with bid/ask imbalance ladders.
 - Options dealer gamma flip levels and order execution latency simulation.
 
-### 5. 📊 Strategy Builder & Backtester (`/strategy`)
+### 6. 📊 Strategy Builder & Backtester (`/strategy`)
 - Custom rule editor supporting SMA, EMA, RSI indicators, custom periods, and breakout operators.
 - Historical backtesting engine generating portfolio equity curves, win rates, maximum drawdowns, and trade history logs.
 
-### 6. 🔍 NeuroScanner (`/scanner`)
+### 7. 🔍 NeuroScanner (`/scanner`)
 - Interactive sector performance heatmaps (Technology, Healthcare, Financials, Energy, Consumer Discretionary).
 - Real-time sector momentum meters, AI sentiment scoring, and Alpha Opportunity notifications.
 - Stock overlay modal for instant metrics and quick trade triggers.
 
-### 7. 🧠 AI Insights & Analyst Chat (`/ai-insights`)
+### 8. 🧠 AI Insights & Analyst Chat (`/ai-insights`)
 - Real-time market summary generation powered by AI models.
 - Sector sentiment heatmaps and directional confidence gauges.
 - Interactive AI Analyst chat assistant for custom equity queries.
 
-### 8. 📈 Detailed Stock Analysis & Paper Trading (`/stocks`, `/stocks/:symbol`)
+### 9. 📈 Detailed Stock Analysis & Paper Trading (`/stocks`, `/stocks/:symbol`)
 - High-performance financial Candlestick Charts powered by `lightweight-charts`.
 - Interactive paper trading order ticket (Buy/Sell, market/limit orders, estimated cost calculation).
 - Fundamental stats, company profile, and AI Sentiment / Risk scores.
 
-### 9. 💼 Portfolio Management (`/portfolio`)
+### 10. 💼 Portfolio Management (`/portfolio`)
 - Real-time portfolio performance tracking, equity breakdown charts, asset allocation pie graphs.
 - Holdings table with live unrealized gain/loss and position management.
 - Complete paper trading transaction history log.
 
-### 10. ⭐️ Custom Watchlists (`/watchlists`)
+### 11. ⭐️ Custom Watchlists (`/watchlists`)
 - Create, rename, edit, and organize custom stock watchlists in grid or list view.
 - Live price change badges and sparkline indicators.
 
-### 11. 📰 Global Market News (`/news`)
+### 12. 📰 Global Market News (`/news`)
 - Filtered news feed across Equities, Crypto, Forex, and Macro Economy.
 - AI Bullish / Bearish impact scoring per news item.
 
-### 12. 📖 Trading Journal (`/journal`)
+### 13. 📖 Trading Journal (`/journal`)
 - Log paper trades, trade rationale, emotion ratings, and outcome tags.
 - Analytics on trader performance and decision discipline.
 
-### 13. ⚙️ Settings (`/settings`)
+### 14. ⚙️ Settings (`/settings`)
 - User profile management, security settings, notification triggers, and default paper trading capital configuration.
 
 ---
@@ -98,7 +105,7 @@ A multi-tab algorithmic environment featuring:
 ### Backend
 - **Runtime**: Node.js & Express (TypeScript)
 - **Database / ORM**: Prisma ORM with SQLite / PostgreSQL support
-- **Services**: Quantitative simulation services, order flow engines, backtest lab engines, mock AI generation modules, and REST API controllers
+- **Services**: Quantitative simulation services, order flow engines, macro lab engines, mock AI generation modules, and REST API controllers
 
 ---
 
@@ -109,7 +116,7 @@ NeuroTrader/
 ├── public/                 # Static public assets
 ├── server/                 # Express backend server
 │   ├── src/
-│   │   ├── controllers/    # API endpoint controllers (backtestLab, copilot, orderFlow, ai, auth, etc.)
+│   │   ├── controllers/    # API endpoint controllers (macroLab, backtestLab, copilot, orderFlow, ai, auth, etc.)
 │   │   ├── middleware/     # JWT authentication & request validation
 │   │   ├── routes/         # Express API router (`/api/...`)
 │   │   ├── services/       # Order flow simulation & quantitative engines
@@ -120,13 +127,14 @@ NeuroTrader/
 │   └── package.json        # Backend dependencies & scripts
 ├── src/                    # Frontend React application
 │   ├── components/
+│   │   ├── macro/          # NeuroMacro Studio (Yield Curve, Correlation, Fed Liquidity, StatArb)
 │   │   ├── backtest/       # NeuroQuant Backtest Studio (Replay, 2D Grid, WalkForward, Basket)
 │   │   ├── copilot/        # NeuroCopilot Studio (Signals, Monte Carlo, GEX, Automation)
 │   │   ├── layout/         # DashboardLayout & responsive Sidebar
 │   │   └── terminal/       # NeuroPatternStudio, OrderFlowRadar, LogicEditor, etc.
 │   ├── context/            # Global React context providers
-│   ├── lib/                # Core engines (NeuroBacktestEngine, NeuroCopilotEngine, ScannerService, auth)
-│   ├── pages/              # Main application views (NeuroBacktestPage, NeuroCopilotPage, Dashboard, etc.)
+│   ├── lib/                # Core engines (NeuroMacroEngine, NeuroBacktestEngine, NeuroCopilotEngine, ScannerService, auth)
+│   ├── pages/              # Main application views (NeuroMacroPage, NeuroBacktestPage, NeuroCopilotPage, Dashboard, etc.)
 │   ├── types/              # TypeScript data interfaces
 │   ├── App.tsx             # Main routing configuration
 │   ├── index.css           # Design tokens, variables, & utility classes

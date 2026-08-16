@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight, BrainCircuit, BookOpen, Activity, Terminal, Zap, Bot, FlaskConical } from 'lucide-react';
+import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight, BrainCircuit, BookOpen, Activity, Terminal, Zap, Bot, FlaskConical, Globe } from 'lucide-react';
 
 
 import { useAuth } from '../../lib/auth';
@@ -10,6 +10,7 @@ const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/copilot', label: 'NeuroCopilot', icon: Bot },
   { path: '/backtest-lab', label: 'Backtest Lab', icon: FlaskConical },
+  { path: '/macro-lab', label: 'Macro Lab', icon: Globe },
   { path: '/watchlists', label: 'Watchlists', icon: Star },
   { path: '/stocks', label: 'Stocks', icon: BarChart3 },
   { path: '/portfolio', label: 'Portfolio', icon: Briefcase },
