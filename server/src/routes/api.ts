@@ -67,4 +67,9 @@ import * as macroLab from '../controllers/macroLabController';
 router.get('/macro-lab/yields', macroLab.getYieldCurveData);
 router.get('/macro-lab/liquidity', macroLab.getMacroLiquidity);
 
+// NeuroRisk Intelligence Studio
+import * as riskLab from '../controllers/riskLabController';
+router.get('/risk-lab/factors', riskLab.getFactorExposures);
+router.get('/risk-lab/stress', riskLab.getStressTestResults);
+
 export default router;
