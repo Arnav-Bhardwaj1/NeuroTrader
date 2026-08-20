@@ -72,4 +72,9 @@ import * as riskLab from '../controllers/riskLabController';
 router.get('/risk-lab/factors', riskLab.getFactorExposures);
 router.get('/risk-lab/stress', riskLab.getStressTestResults);
 
+// NeuroAlpha Intelligence Studio
+import * as alphaLab from '../controllers/alphaLabController';
+router.get('/alpha-lab/insiders', alphaLab.getInsiderClusters);
+router.get('/alpha-lab/whispers', alphaLab.getEarningsWhispers);
+
 export default router;
