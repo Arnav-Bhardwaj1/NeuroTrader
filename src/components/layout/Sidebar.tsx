@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight, BrainCircuit, BookOpen, Activity, Terminal, Zap, Bot, FlaskConical, Globe, ShieldAlert, Sparkles } from 'lucide-react';
+import { Star, Newspaper, Settings, LogOut, TrendingUp, BarChart3, Briefcase, Brain, LayoutDashboard, ChevronLeft, ChevronRight, BrainCircuit, BookOpen, Activity, Terminal, Zap, Bot, FlaskConical, Globe, ShieldAlert, Sparkles, Cpu } from 'lucide-react';
 
 
 import { useAuth } from '../../lib/auth';
@@ -13,6 +13,7 @@ const navItems = [
   { path: '/macro-lab', label: 'Macro Lab', icon: Globe },
   { path: '/risk-lab', label: 'Risk Lab', icon: ShieldAlert },
   { path: '/alpha-lab', label: 'Alpha Lab', icon: Sparkles },
+  { path: '/execution-lab', label: 'Execution Lab', icon: Cpu },
   { path: '/watchlists', label: 'Watchlists', icon: Star },
   { path: '/stocks', label: 'Stocks', icon: BarChart3 },
   { path: '/portfolio', label: 'Portfolio', icon: Briefcase },

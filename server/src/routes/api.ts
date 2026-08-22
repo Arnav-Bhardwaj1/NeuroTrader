@@ -77,4 +77,9 @@ import * as alphaLab from '../controllers/alphaLabController';
 router.get('/alpha-lab/insiders', alphaLab.getInsiderClusters);
 router.get('/alpha-lab/whispers', alphaLab.getEarningsWhispers);
 
+// NeuroExecution Intelligence Studio
+import * as executionLab from '../controllers/executionLabController';
+router.get('/execution-lab/venues', executionLab.getExecutionVenues);
+router.get('/execution-lab/tca', executionLab.getTcaReports);
+
 export default router;
