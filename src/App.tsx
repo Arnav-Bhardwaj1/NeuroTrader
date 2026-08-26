@@ -22,6 +22,7 @@ import NeuroMacroPage from './pages/NeuroMacroPage';
 import NeuroRiskPage from './pages/NeuroRiskPage';
 import NeuroAlphaPage from './pages/NeuroAlphaPage';
 import NeuroExecutionPage from './pages/NeuroExecutionPage';
+import NeuroVolPage from './pages/NeuroVolPage';
 import OrderFlowRadar from './components/terminal/OrderFlowRadar';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -47,6 +48,7 @@ function AppRoutes() {
         <Route path="risk-lab" element={<NeuroRiskPage />} />
         <Route path="alpha-lab" element={<NeuroAlphaPage />} />
         <Route path="execution-lab" element={<NeuroExecutionPage />} />
+        <Route path="volatility-lab" element={<NeuroVolPage />} />
         <Route path="watchlists" element={<WatchlistPage />} />
         <Route path="news" element={<NewsPage />} />
         <Route path="settings" element={<SettingsPage />} />

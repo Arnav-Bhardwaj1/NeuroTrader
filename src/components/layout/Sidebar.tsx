@@ -14,6 +14,7 @@ const navItems = [
   { path: '/risk-lab', label: 'Risk Lab', icon: ShieldAlert },
   { path: '/alpha-lab', label: 'Alpha Lab', icon: Sparkles },
   { path: '/execution-lab', label: 'Execution Lab', icon: Cpu },
+  { path: '/volatility-lab', label: 'Volatility Lab', icon: TrendingUp },
   { path: '/watchlists', label: 'Watchlists', icon: Star },
   { path: '/stocks', label: 'Stocks', icon: BarChart3 },
   { path: '/portfolio', label: 'Portfolio', icon: Briefcase },

@@ -82,4 +82,9 @@ import * as executionLab from '../controllers/executionLabController';
 router.get('/execution-lab/venues', executionLab.getExecutionVenues);
 router.get('/execution-lab/tca', executionLab.getTcaReports);
 
+// NeuroDerivatives & Volatility Studio
+import * as volLab from '../controllers/volLabController';
+router.get('/volatility-lab/surface', volLab.getVolSurface);
+router.get('/volatility-lab/greeks', volLab.getPortfolioGreeks);
+
 export default router;
